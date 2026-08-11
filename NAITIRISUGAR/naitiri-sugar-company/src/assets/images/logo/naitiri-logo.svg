@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420">
+<rect width="1000" height="420" rx="20" fill="#fff"/>
+<g transform="translate(90 35)">
+<circle cx="145" cy="115" r="86" fill="#F5C451"/>
+<path d="M52 192Q145 126 245 192" fill="none" stroke="#0A5A32" stroke-width="14"/>
+<path d="M72 190Q145 145 222 190" fill="none" stroke="#78A92F" stroke-width="9"/>
+<path d="M125 184V83M125 118C91 108 76 87 79 61C105 66 122 82 125 104M127 115C158 103 177 80 176 52C151 58 133 77 127 101" fill="none" stroke="#2E7D32" stroke-width="12" stroke-linecap="round"/>
+<path d="M141 184H219V136H193V112H179V136H158L141 149Z" fill="#174A38"/>
+<path d="M193 112V91H205V112M198 88Q203 77 210 72" fill="none" stroke="#174A38" stroke-width="8" stroke-linecap="round"/>
+</g>
+<text x="365" y="195" font-family="Georgia,serif" font-size="92" font-weight="700" letter-spacing="5" fill="#0A5A32">NAITIRI</text>
+<text x="369" y="243" font-family="Arial,sans-serif" font-size="30" font-weight="700" letter-spacing="8" fill="#C59A35">SUGAR COMPANY</text>
+<path d="M370 265H830" stroke="#C59A35" stroke-width="2"/>
+<text x="372" y="300" font-family="Georgia,serif" font-size="21" font-style="italic" fill="#456052">Growing Together • Sweeter Tomorrow</text>
+</svg>
