@@ -1,4 +1,3 @@
-import Container from '../components/Container';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import farmer1 from '../assets/images/farmers/Farmer-01.jpg';

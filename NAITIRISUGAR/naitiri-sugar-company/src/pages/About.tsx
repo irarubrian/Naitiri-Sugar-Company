@@ -1,5 +1,3 @@
-import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
 import { Link } from 'react-router-dom';
 
 // Image imports
@@ -9,7 +7,6 @@ import farmerImage from '../assets/images/home/farmer.jpg';
 import sugarcaneFieldImage from '../assets/images/home/sugarcane-field.jpg';
 
 const About = () => {
-  const { t } = useLanguage();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -1,4 +1,3 @@
-import Container from '../components/Container';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Link } from 'react-router-dom';
 import environmentImg from '../assets/images/sustainability/environment.jpeg';

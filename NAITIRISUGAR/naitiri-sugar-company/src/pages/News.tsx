@@ -1,5 +1,4 @@
 import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { siteData } from '../data/siteData';

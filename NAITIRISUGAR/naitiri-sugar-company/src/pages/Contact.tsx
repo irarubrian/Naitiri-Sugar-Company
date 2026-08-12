@@ -1,5 +1,3 @@
-import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
 import { useState, useRef, useEffect } from 'react';
 
 interface FormData {
@@ -16,7 +14,6 @@ interface FAQItem {
 }
 
 const Contact = () => {
-  const { t } = useLanguage();
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState<FormData>({
     name: '',

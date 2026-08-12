@@ -1,15 +1,10 @@
 import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
-import { Link } from 'react-router-dom';
 import { siteData } from '../data/siteData';
 import careersImage from '../assets/images/careers/careers.jpg';
 
 const Careers = () => {
   const { t } = useLanguage();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const handleApply = (jobPosition: string, jobDepartment: string) => {
     const subject = encodeURIComponent(`Job Application: ${jobPosition} - ${jobDepartment}`);

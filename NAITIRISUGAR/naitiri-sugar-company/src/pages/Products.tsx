@@ -1,5 +1,4 @@
 import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
 import { Link } from 'react-router-dom';
 
 // Image imports
@@ -162,7 +161,7 @@ const Products = () => {
 
           {/* Products Grid */}
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, index) => (
+            {products.map((product) => (
               <div
                 key={product.id}
                 className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl"

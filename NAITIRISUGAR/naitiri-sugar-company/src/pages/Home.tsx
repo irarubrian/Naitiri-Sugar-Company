@@ -13,7 +13,6 @@ import industrialSugarImage from '../assets/images/products/industrial-sugar.jpg
 import packagingImage from '../assets/images/products/packaging.jpg';
 import environmentImage from '../assets/images/sustainability/environment.jpeg';
 import communityImage from '../assets/images/sustainability/community.jpg';
-import careersImage from '../assets/images/careers/careers.jpg';
 import newsPlaceholder from '../assets/images/news/placeholder.jpg';
 
 const Home = () => {
