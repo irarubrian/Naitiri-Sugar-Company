@@ -1,6 +1,5 @@
-import { useLanguage } from '../i18n/LanguageContext';
 import Container from '../components/Container';
-import SectionTitle from '../components/SectionTitle';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Link } from 'react-router-dom';
 import environmentImg from '../assets/images/sustainability/environment.jpeg';
 import communityImg from '../assets/images/sustainability/community.jpg';
@@ -13,75 +12,124 @@ const Sustainability = () => {
   };
 
   return (
-    <main className="bg-white">
-      {/* Hero Section */}
-      <section className="relative bg-green-950 py-24 lg:py-32">
+    <div className="min-h-screen bg-white">
+      {/* ============================================================ */}
+      {/* HERO SECTION */}
+      {/* ============================================================ */}
+      <section className="relative min-h-[80vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={environmentImg}
-            alt="Lush green sugarcane fields demonstrating Naitiri Sugar's commitment to environmental sustainability and responsible farming practices"
-            className="h-full w-full object-cover opacity-30"
+            alt="Sustainable sugarcane farming at Naitiri Sugar Company"
+            className="h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-green-950/95 to-green-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c2a]/95 via-[#1a3c2a]/80 to-[#1a3c2a]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/95 via-transparent to-transparent" />
         </div>
 
-        <Container>
-          <div className="relative max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-widest text-lime-400">
-              Our Responsibility
-            </p>
-            <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              {t.sustainability.title}
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-300">
-              We are committed to sustainable practices that protect the environment, 
-              support our communities, and ensure a better future for generations to come.
-            </p>
+        <div className="relative flex min-h-[80vh] items-center">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl text-white">
+              {/* Badge */}
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm backdrop-blur-sm">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
+                OUR RESPONSIBILITY
+              </div>
+              
+              {/* Main Heading */}
+              <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+                {t.sustainability.title}
+              </h1>
+              
+              {/* Description */}
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+                We are committed to sustainable practices that protect the environment, 
+                support our communities, and ensure a better future for generations to come.
+              </p>
+            </div>
           </div>
-        </Container>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce sm:block">
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-xs uppercase tracking-widest text-white/40">Scroll</span>
+            <svg className="h-6 w-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-16 lg:py-20">
-        <Container>
+      {/* ============================================================ */}
+      {/* INTRODUCTION */}
+      {/* ============================================================ */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-green-700">
-              Sustainability at Naitiri
-            </p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
+            <div className="mb-3 flex items-center justify-center gap-3 text-sm font-semibold text-[#1a3c2a]">
+              <span className="h-px w-8 bg-[#1a3c2a]" />
+              SUSTAINABILITY AT NAITIRI
+              <span className="h-px w-8 bg-[#1a3c2a]" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
               Balancing Profit, People, and Planet
             </h2>
-            <p className="mt-5 text-lg leading-relaxed text-gray-600">
+            <p className="mt-4 text-base leading-relaxed text-gray-600">
               Sustainability is woven into every aspect of our operations. From responsible 
               farming to community development, we strive to create lasting positive impact.
             </p>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Environmental Sustainability */}
-      <section className="bg-gray-50 py-16 lg:py-20">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="overflow-hidden rounded-xl">
-              <img
-                src={environmentImg}
-                alt="Expansive sugarcane plantation showcasing Naitiri Sugar's sustainable farming methods, including water conservation, soil management, and biodiversity preservation across acres of green fields"
-                className="h-80 w-full object-cover lg:h-96"
-              />
+      {/* ============================================================ */}
+      {/* ENVIRONMENTAL STEWARDSHIP */}
+      {/* ============================================================ */}
+      <section className="bg-gray-50 py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-16 lg:grid-cols-2">
+            {/* Left - Professional Image Display */}
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <img
+                  src={environmentImg}
+                  alt="Sustainable farming methods including water conservation and soil management at Naitiri Sugar"
+                  className="h-[500px] w-full object-cover object-center"
+                  loading="lazy"
+                />
+                {/* Subtle overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/40 via-transparent to-transparent" />
+                
+                {/* Image label */}
+                <div className="absolute bottom-6 left-6">
+                  <div className="rounded-lg bg-white/90 backdrop-blur-sm px-5 py-3 shadow-lg">
+                    <p className="text-sm font-semibold text-[#1a3c2a]">Environmental Conservation</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Our sugarcane fields</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative accent */}
+              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-[#1a3c2a]/5 hidden lg:block" />
+              <div className="absolute -left-4 -bottom-4 h-16 w-16 rounded-full bg-[#1a3c2a]/5 hidden lg:block" />
             </div>
+
+            {/* Right - Content */}
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-green-600">
-                Environmental Stewardship
-              </span>
-              <h3 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl">
+              <div className="mb-3 flex items-center gap-3 text-sm font-semibold text-[#1a3c2a]">
+                <span className="h-px w-8 bg-[#1a3c2a]" />
+                ENVIRONMENTAL STEWARDSHIP
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 sm:text-4xl">
                 {t.sustainability.envTitle}
               </h3>
               <p className="mt-4 text-base leading-relaxed text-gray-600">
                 {t.sustainability.envText}
               </p>
               
-              <div className="mt-6 space-y-3">
+              {/* Environmental Initiatives */}
+              <div className="mt-8 space-y-4">
                 {[
                   {
                     title: 'Water Conservation',
@@ -100,40 +148,45 @@ const Sustainability = () => {
                     description: 'Converting sugarcane bagasse into renewable energy and implementing zero-waste processing systems.',
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex gap-3 rounded-lg bg-white p-4 shadow-sm">
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
-                      <svg className="h-4 w-4 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  <div key={idx} className="flex gap-4 rounded-xl bg-white p-5 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#1a3c2a]/10">
+                      <svg className="h-6 w-6 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-sm">{item.title}</h4>
-                      <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+                      <h4 className="font-semibold text-gray-900">{item.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-gray-600">{item.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Community Development */}
-      <section className="py-16 lg:py-20">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      {/* ============================================================ */}
+      {/* COMMUNITY DEVELOPMENT */}
+      {/* ============================================================ */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-16 lg:grid-cols-2">
+            {/* Left - Content */}
             <div className="order-2 lg:order-1">
-              <span className="text-xs font-semibold uppercase tracking-wider text-green-600">
-                Community Impact
-              </span>
-              <h3 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl">
+              <div className="mb-3 flex items-center gap-3 text-sm font-semibold text-[#1a3c2a]">
+                <span className="h-px w-8 bg-[#1a3c2a]" />
+                COMMUNITY IMPACT
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 sm:text-4xl">
                 {t.sustainability.communityTitle}
               </h3>
               <p className="mt-4 text-base leading-relaxed text-gray-600">
                 {t.sustainability.communityText}
               </p>
               
-              <div className="mt-6 space-y-3">
+              {/* Community Initiatives */}
+              <div className="mt-8 space-y-4">
                 {[
                   {
                     title: 'Education & Training',
@@ -152,46 +205,70 @@ const Sustainability = () => {
                     description: 'Investing in rural roads, water systems, and community facilities to improve quality of life.',
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex gap-3 rounded-lg bg-green-50 p-4">
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-200">
-                      <svg className="h-4 w-4 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  <div key={idx} className="flex gap-4 rounded-xl bg-gray-50 p-5 transition-all hover:shadow-md hover:-translate-y-0.5">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#1a3c2a]/10">
+                      <svg className="h-6 w-6 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 text-sm">{item.title}</h4>
-                      <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+                      <h4 className="font-semibold text-gray-900">{item.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-gray-600">{item.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="order-1 overflow-hidden rounded-xl lg:order-2">
-              <img
-                src={communityImg}
-                alt="Local community members benefiting from Naitiri Sugar's social development programs, including education initiatives, healthcare support, and economic empowerment projects in rural areas"
-                className="h-80 w-full object-cover lg:h-96"
-              />
+
+            {/* Right - Professional Image Display */}
+            <div className="order-1 lg:order-2 relative">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                <img
+                  src={communityImg}
+                  alt="Community members benefiting from Naitiri Sugar social development programs"
+                  className="h-[500px] w-full object-cover object-center"
+                  loading="lazy"
+                />
+                {/* Subtle overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/40 via-transparent to-transparent" />
+                
+                {/* Image label */}
+                <div className="absolute bottom-6 left-6">
+                  <div className="rounded-lg bg-white/90 backdrop-blur-sm px-5 py-3 shadow-lg">
+                    <p className="text-sm font-semibold text-[#1a3c2a]">Community Development</p>
+                    <p className="text-xs text-gray-500 mt-0.5">Empowering local communities</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative accent */}
+              <div className="absolute -left-4 -top-4 h-20 w-20 rounded-full bg-[#1a3c2a]/5 hidden lg:block" />
+              <div className="absolute -right-4 -bottom-4 h-28 w-28 rounded-full bg-[#1a3c2a]/5 hidden lg:block" />
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Future Commitment */}
-      <section className="bg-green-950 py-16 lg:py-20">
-        <Container>
+      {/* ============================================================ */}
+      {/* LOOKING AHEAD - Future Goals */}
+      {/* ============================================================ */}
+      <section className="bg-[#1a3c2a] py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-lime-400">
-              Looking Ahead
-            </p>
-            <h3 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+            <div className="mb-4 flex items-center justify-center gap-3 text-sm font-semibold text-green-300">
+              <span className="h-px w-8 bg-green-300" />
+              LOOKING AHEAD
+              <span className="h-px w-8 bg-green-300" />
+            </div>
+            <h3 className="text-3xl font-bold text-white sm:text-4xl">
               {t.sustainability.futureTitle}
             </h3>
-            <p className="mt-5 text-lg leading-relaxed text-gray-300">
+            <p className="mt-4 text-lg leading-relaxed text-green-100/70">
               {t.sustainability.futureText}
             </p>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {/* Goals Grid */}
+            <div className="mt-12 grid gap-6 sm:grid-cols-3">
               {[
                 {
                   value: '2030',
@@ -209,64 +286,33 @@ const Sustainability = () => {
                   description: 'Continuing to invest in the communities that support our success.',
                 },
               ].map((goal, idx) => (
-                <div key={idx} className="rounded-xl bg-white/5 p-6 backdrop-blur-sm">
-                  <p className="text-3xl font-bold text-lime-400">{goal.value}</p>
-                  <h4 className="mt-2 font-semibold text-white">{goal.label}</h4>
-                  <p className="mt-2 text-sm text-gray-400">{goal.description}</p>
+                <div key={idx} className="rounded-2xl bg-white/5 p-8 backdrop-blur-sm border border-white/10 transition-all hover:bg-white/10">
+                  <p className="text-5xl font-bold text-white">{goal.value}</p>
+                  <h4 className="mt-4 text-lg font-semibold text-white">{goal.label}</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-green-100/60">{goal.description}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-10">
-              <Link
-                to="/contact"
-                onClick={scrollToTop}
-                className="inline-flex items-center rounded-lg bg-lime-400 px-6 py-3 font-semibold text-green-950 transition-colors hover:bg-lime-300"
-              >
-                Learn More About Our Initiatives
-                <span className="ml-2">→</span>
+            {/* CTA */}
+            <div className="mt-12">
+              <Link to="/contact" onClick={scrollToTop}>
+                <button className="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 font-semibold text-[#1a3c2a] shadow-lg transition-all hover:bg-gray-50 hover:shadow-xl hover:-translate-y-0.5">
+                  Learn More About Our Initiatives
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
               </Link>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-lime-400 py-16">
-        <Container>
-          <div className="flex flex-col items-center justify-between gap-6 text-center lg:flex-row lg:text-left">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-green-900">
-                Join Our Journey
-              </p>
-              <h2 className="mt-2 text-3xl font-bold text-green-950">
-                Together, we can make a difference.
-              </h2>
-              <p className="mt-2 text-green-900/70">
-                Partner with us in building a sustainable future for all.
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <Link
-                to="/contact"
-                onClick={scrollToTop}
-                className="inline-flex items-center rounded-lg bg-green-950 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-900"
-              >
-                Contact Us
-                <span className="ml-2">→</span>
-              </Link>
-              <Link
-                to="/farmers"
-                onClick={scrollToTop}
-                className="inline-flex items-center rounded-lg border-2 border-green-900/30 px-6 py-3 font-semibold text-green-900 transition-colors hover:bg-green-900/10"
-              >
-                Our Farmers
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </main>
+      {/* ============================================================ */}
+      {/* FINAL CTA */}
+
+    </div>
   );
 };
 

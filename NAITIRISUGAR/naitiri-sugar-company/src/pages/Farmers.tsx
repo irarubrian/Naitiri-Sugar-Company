@@ -1,7 +1,6 @@
+import Container from '../components/Container';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
-import SectionTitle from '../components/SectionTitle';
 import farmer1 from '../assets/images/farmers/Farmer-01.jpg';
 import farmer2 from '../assets/images/farmers/farme-02.jpg';
 import caneDelivery from '../assets/images/farmers/cane-delivery.jpg';
@@ -14,74 +13,116 @@ const Farmers = () => {
   };
 
   return (
-    <main className="bg-white">
-      {/* Hero Section */}
-      <section className="relative bg-green-950 py-24 lg:py-32">
+    <div className="min-h-screen bg-white">
+      {/* ============================================================ */}
+      {/* HERO SECTION */}
+      {/* ============================================================ */}
+      <section className="relative min-h-[80vh] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={farmer1}
             alt="Sugarcane farmer inspecting crops in the field"
-            className="h-full w-full object-cover opacity-40"
+            className="h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-green-950/95 to-green-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c2a]/95 via-[#1a3c2a]/85 to-[#1a3c2a]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/95 via-transparent to-transparent" />
         </div>
 
-        <Container>
-          <div className="relative max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-widest text-lime-400">
-              Farmers & Partnerships
-            </p>
-            <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              Growing together,<br />
-              <span className="text-lime-400">harvesting success.</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-300">
-              We partner with local sugarcane farmers to promote sustainable agriculture, 
-              strengthen livelihoods, and build a reliable supply chain for quality sugar production.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                to="/contact"
-                onClick={scrollToTop}
-                className="inline-flex items-center rounded-lg bg-lime-400 px-6 py-3 font-semibold text-green-950 transition-colors hover:bg-lime-300"
-              >
-                Partner With Us
-                <span className="ml-2">→</span>
-              </Link>
-              <a
-                href="#programs"
-                className="inline-flex items-center rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
-              >
-                Our Programs
-              </a>
+        <div className="relative flex min-h-[80vh] items-center">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl text-white">
+              {/* Badge */}
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm backdrop-blur-sm">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
+                FARMERS & PARTNERSHIPS
+              </div>
+              
+              {/* Main Heading */}
+              <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+                Growing Together,<br />
+                Harvesting Success.
+              </h1>
+              
+              {/* Description */}
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+                We partner with local sugarcane farmers to promote sustainable agriculture, 
+                strengthen livelihoods, and build a reliable supply chain for quality sugar production.
+              </p>
+              
+              {/* CTA Buttons */}
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link to="/contact" onClick={scrollToTop}>
+                  <button className="rounded-lg bg-white px-8 py-3.5 font-semibold text-[#1a3c2a] shadow-lg transition-all hover:scale-105 hover:bg-gray-50 hover:shadow-xl">
+                    Partner With Us →
+                  </button>
+                </Link>
+                <a href="#programs">
+                  <button className="rounded-lg border-2 border-white/40 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/10">
+                    Our Programs
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
-        </Container>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce sm:block">
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-xs uppercase tracking-widest text-white/40">Scroll</span>
+            <svg className="h-6 w-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-20">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      {/* ============================================================ */}
+      {/* OUR FARMER NETWORK */}
+      {/* ============================================================ */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Left - Content */}
             <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-green-700">
-                Our Farmer Network
-              </p>
-              <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
-                Strong farmers build a strong sugar industry.
+              <div className="mb-3 flex items-center gap-3 text-sm font-semibold text-[#1a3c2a]">
+                <span className="h-px w-8 bg-[#1a3c2a]" />
+                OUR FARMER NETWORK
+              </div>
+              
+              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
+                Strong Farmers Build a Strong Sugar Industry.
               </h2>
-              <p className="mt-5 text-lg leading-relaxed text-gray-600">
-                At Naitiri Sugar Company, farmers are at the heart of everything we do. 
-                We believe long-term success comes from strong relationships, better farming 
-                practices, and an efficient journey from field to factory.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-gray-500">
-                Our support covers everything from seed selection and soil management to 
-                harvesting techniques and timely transportation. We're committed to walking 
-                alongside our farmers every step of the way.
-              </p>
+              
+              <div className="mt-6 space-y-4">
+                <p className="text-base leading-relaxed text-gray-600">
+                  At Naitiri Sugar Company, farmers are at the heart of everything we do. 
+                  We believe long-term success comes from strong relationships, better farming 
+                  practices, and an efficient journey from field to factory.
+                </p>
+                <p className="text-base leading-relaxed text-gray-600">
+                  Our support covers everything from seed selection and soil management to 
+                  harvesting techniques and timely transportation. We're committed to walking 
+                  alongside our farmers every step of the way.
+                </p>
+              </div>
+              
+              {/* Stats */}
+              <div className="mt-10 grid grid-cols-3 gap-6 border-t border-gray-200 pt-8">
+                {[
+                  { value: '500+', label: 'Partner Farmers' },
+                  { value: '15+', label: 'Years Experience' },
+                  { value: '100%', label: 'Farmer-Focused' },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center">
+                    <div className="text-2xl font-bold text-[#1a3c2a] lg:text-3xl">{stat.value}</div>
+                    <div className="mt-1 text-xs font-medium uppercase tracking-wider text-gray-500">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
+            {/* Right - Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
               {[
                 { value: '500+', label: 'Partner Farmers' },
@@ -93,49 +134,58 @@ const Farmers = () => {
                   key={idx}
                   className={`rounded-xl p-6 ${
                     idx === 1 || idx === 3
-                      ? 'bg-green-900 text-white'
-                      : 'bg-green-50 text-gray-900'
+                      ? 'bg-[#1a3c2a] text-white'
+                      : 'bg-gray-50 text-gray-900'
                   }`}
                 >
-                  <p className={`text-3xl font-bold ${idx === 1 || idx === 3 ? 'text-lime-400' : 'text-green-800'}`}>
+                  <p className={`text-3xl font-bold ${idx === 1 || idx === 3 ? 'text-white' : 'text-[#1a3c2a]'}`}>
                     {stat.value}
                   </p>
-                  <p className={`mt-1 text-sm ${idx === 1 || idx === 3 ? 'text-green-100' : 'text-gray-600'}`}>
+                  <p className={`mt-1 text-sm ${idx === 1 || idx === 3 ? 'text-green-100/70' : 'text-gray-600'}`}>
                     {stat.label}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Programs */}
-      <section id="programs" className="bg-gray-50 py-20">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-green-700">
-              What We Do
-            </p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
+      {/* ============================================================ */}
+      {/* PROGRAMS */}
+      {/* ============================================================ */}
+      <section id="programs" className="bg-gray-50 py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <div className="mb-3 flex items-center justify-center gap-3 text-sm font-semibold text-[#1a3c2a]">
+              <span className="h-px w-8 bg-[#1a3c2a]" />
+              WHAT WE DO
+              <span className="h-px w-8 bg-[#1a3c2a]" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
               Supporting Farmers From Field to Factory
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-3 text-base text-gray-600">
               Our farmer-focused approach connects agricultural development, technical 
               support, and efficient cane delivery into one integrated partnership.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {/* Card 1 */}
-            <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-              <img
-                src={farmer2}
-                alt="Smallholder sugarcane farmers gathered in a field, demonstrating community partnerships"
-                className="h-56 w-full object-cover"
-              />
-              <div className="p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-green-600">
+          {/* Program Cards */}
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Card 1 - Farmer Support */}
+            <div className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={farmer2}
+                  alt="Smallholder sugarcane farmers gathered in a field"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#1a3c2a]">
                   Farmer Support
                 </span>
                 <h3 className="mt-2 text-xl font-bold text-gray-900">
@@ -146,8 +196,12 @@ const Farmers = () => {
                 </p>
                 <ul className="mt-4 space-y-2">
                   {['Agricultural training', 'Quality inputs & seeds', 'Financial assistance', 'Technical field support'].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="text-green-600">✓</span>
+                    <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-700">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#1a3c2a]/10">
+                        <svg className="h-3 w-3 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
                       {item}
                     </li>
                   ))}
@@ -155,15 +209,18 @@ const Farmers = () => {
               </div>
             </div>
 
-            {/* Card 2 */}
-            <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-              <img
-                src={farmer1}
-                alt="Experienced farmer examining sugarcane crop quality and maturity"
-                className="h-56 w-full object-cover"
-              />
-              <div className="p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-green-600">
+            {/* Card 2 - Cane Development */}
+            <div className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={farmer1}
+                  alt="Experienced farmer examining sugarcane crop quality"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#1a3c2a]">
                   Cane Development
                 </span>
                 <h3 className="mt-2 text-xl font-bold text-gray-900">
@@ -174,8 +231,12 @@ const Farmers = () => {
                 </p>
                 <ul className="mt-4 space-y-2">
                   {['Improved seed varieties', 'Soil management', 'Water conservation', 'Pest & disease control'].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="text-green-600">✓</span>
+                    <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-700">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#1a3c2a]/10">
+                        <svg className="h-3 w-3 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
                       {item}
                     </li>
                   ))}
@@ -183,15 +244,18 @@ const Farmers = () => {
               </div>
             </div>
 
-            {/* Card 3 */}
-            <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-              <img
-                src={caneDelivery}
-                alt="Freshly harvested sugarcane being transported to processing facility"
-                className="h-56 w-full object-cover"
-              />
-              <div className="p-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-green-600">
+            {/* Card 3 - Cane Delivery */}
+            <div className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={caneDelivery}
+                  alt="Freshly harvested sugarcane being transported"
+                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#1a3c2a]">
                   Cane Delivery
                 </span>
                 <h3 className="mt-2 text-xl font-bold text-gray-900">
@@ -202,8 +266,12 @@ const Farmers = () => {
                 </p>
                 <ul className="mt-4 space-y-2">
                   {['Efficient scheduling', 'Modern transport fleet', 'Quick turnaround', 'Fair weighing & payment'].map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="text-green-600">✓</span>
+                    <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-700">
+                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#1a3c2a]/10">
+                        <svg className="h-3 w-3 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
                       {item}
                     </li>
                   ))}
@@ -211,26 +279,33 @@ const Farmers = () => {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Partnership */}
-      <section className="bg-green-950 py-20">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      {/* ============================================================ */}
+      {/* OUR COMMITMENT */}
+      {/* ============================================================ */}
+      <section className="bg-[#1a3c2a] py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Left - Content */}
             <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-lime-400">
-                Our Commitment
-              </p>
-              <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-                Building lasting partnerships with our farmers.
+              <div className="mb-3 flex items-center gap-3 text-sm font-semibold text-green-300">
+                <span className="h-px w-8 bg-green-300" />
+                OUR COMMITMENT
+              </div>
+              
+              <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+                Building Lasting Partnerships With Our Farmers.
               </h2>
-              <p className="mt-5 text-lg leading-relaxed text-gray-300">
+              
+              <p className="mt-6 text-base leading-relaxed text-green-100/70">
                 We aim to create a thriving agricultural ecosystem where farmers, communities, 
                 and the sugar industry grow together through responsible practices and shared opportunity.
               </p>
               
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {/* Values Grid */}
+              <div className="mt-10 grid gap-3 sm:grid-cols-2">
                 {[
                   { title: 'Trust & Transparency', desc: 'Fair pricing and open communication' },
                   { title: 'Sustainability', desc: 'Environmental stewardship' },
@@ -239,77 +314,71 @@ const Farmers = () => {
                 ].map((item, idx) => (
                   <div key={idx} className="rounded-lg bg-white/5 p-4">
                     <h4 className="font-semibold text-white">{item.title}</h4>
-                    <p className="mt-1 text-sm text-gray-400">{item.desc}</p>
+                    <p className="mt-1 text-sm text-green-100/60">{item.desc}</p>
                   </div>
                 ))}
               </div>
 
+              {/* CTA Buttons */}
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  to="/contact"
-                  onClick={scrollToTop}
-                  className="inline-flex items-center rounded-lg bg-lime-400 px-6 py-3 font-semibold text-green-950 transition-colors hover:bg-lime-300"
-                >
-                  Get In Touch
-                  <span className="ml-2">→</span>
+                <Link to="/contact" onClick={scrollToTop}>
+                  <button className="rounded-lg bg-white px-6 py-3 font-semibold text-[#1a3c2a] transition-all hover:bg-gray-50 hover:shadow-lg">
+                    Get In Touch →
+                  </button>
                 </Link>
-                <Link
-                  to="/sustainability"
-                  onClick={scrollToTop}
-                  className="inline-flex items-center rounded-lg border border-white/20 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
-                >
-                  Sustainability
+                <Link to="/sustainability" onClick={scrollToTop}>
+                  <button className="rounded-lg border-2 border-white/40 px-6 py-3 font-semibold text-white transition-all hover:bg-white/10">
+                    Sustainability
+                  </button>
                 </Link>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-xl">
+            {/* Right - Image */}
+            <div className="overflow-hidden rounded-xl shadow-xl">
               <img
                 src={farmer2}
                 alt="Community of sugarcane farmers standing together in their fields"
-                className="h-80 w-full object-cover lg:h-96"
+                className="h-96 w-full object-cover object-center"
               />
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-lime-400 py-16">
-        <Container>
-          <div className="flex flex-col items-center justify-between gap-6 text-center lg:flex-row lg:text-left">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-green-900">
-                Work With Naitiri
-              </p>
-              <h2 className="mt-2 text-3xl font-bold text-green-950">
-                Let's grow a stronger future together.
-              </h2>
-              <p className="mt-2 text-green-900/70">
-                Ready to partner with us? Contact our team to learn more.
-              </p>
+      {/* ============================================================ */}
+      {/* FINAL CTA */}
+      {/* ============================================================ */}
+      <section className="bg-white py-20 text-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <div className="mb-3 flex items-center justify-center gap-3 text-sm font-semibold text-[#1a3c2a]">
+              <span className="h-px w-8 bg-[#1a3c2a]" />
+              WORK WITH US
+              <span className="h-px w-8 bg-[#1a3c2a]" />
             </div>
-            <div className="flex gap-4">
-              <Link
-                to="/contact"
-                onClick={scrollToTop}
-                className="inline-flex items-center rounded-lg bg-green-950 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-900"
-              >
-                Contact Us
-                <span className="ml-2">→</span>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+              Let's Grow a Stronger Future Together.
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Ready to partner with us? Contact our team to learn more about our farmer programs.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Link to="/contact" onClick={scrollToTop}>
+                <button className="rounded-lg bg-[#1a3c2a] px-8 py-3.5 font-semibold text-white shadow-lg transition-all hover:bg-[#2a5c3a] hover:shadow-xl">
+                  Contact Us →
+                </button>
               </Link>
-              <Link
-                to="/about"
-                onClick={scrollToTop}
-                className="inline-flex items-center rounded-lg border-2 border-green-900/30 px-6 py-3 font-semibold text-green-900 transition-colors hover:bg-green-900/10"
-              >
-                About Us
+              <Link to="/about" onClick={scrollToTop}>
+                <button className="rounded-lg border-2 border-[#1a3c2a] px-8 py-3.5 font-semibold text-[#1a3c2a] transition-all hover:bg-[#1a3c2a] hover:text-white">
+                  About Us
+                </button>
               </Link>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
-    </main>
+    </div>
   );
 };
 

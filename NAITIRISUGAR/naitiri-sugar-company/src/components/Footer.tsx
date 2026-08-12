@@ -31,7 +31,6 @@ const Footer = () => {
         </svg>
       ),
       url: siteData.contact.socialMedia?.facebook || '#',
-      color: 'hover:bg-[#1877f2]'
     },
     { 
       name: 'Twitter', 
@@ -41,7 +40,6 @@ const Footer = () => {
         </svg>
       ),
       url: siteData.contact.socialMedia?.twitter || '#',
-      color: 'hover:bg-[#000000]'
     },
     { 
       name: 'Instagram', 
@@ -51,7 +49,6 @@ const Footer = () => {
         </svg>
       ),
       url: siteData.contact.socialMedia?.instagram || '#',
-      color: 'hover:bg-gradient-to-br from-[#f09433] to-[#bc1888]'
     },
     { 
       name: 'LinkedIn', 
@@ -61,7 +58,6 @@ const Footer = () => {
         </svg>
       ),
       url: siteData.contact.socialMedia?.linkedin || '#',
-      color: 'hover:bg-[#0a66c2]'
     },
     { 
       name: 'YouTube', 
@@ -71,52 +67,38 @@ const Footer = () => {
         </svg>
       ),
       url: siteData.contact.socialMedia?.youtube || '#',
-      color: 'hover:bg-[#ff0000]'
     },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-b from-green-900 via-green-950 to-[#0a1a0a] text-white overflow-hidden">
-      {/* Decorative top accent */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
-      
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1" fill="currentColor" />
-          </pattern>
-          <rect width="100" height="100" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <footer className="bg-[#1a3c2a] text-white">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12 lg:py-20">
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          
           {/* Logo & Tagline */}
-          <div className="space-y-4">
-            <Link to="/" className="inline-block transition-transform hover:scale-105">
+          <div className="space-y-5">
+            <Link to="/" className="inline-block transition-opacity hover:opacity-80">
               <img 
                 src={logo} 
                 alt="Naitiri Sugar Company" 
-                className="h-14 w-auto brightness-0 invert" 
+                className="h-12 w-auto brightness-0 invert" 
               />
             </Link>
-            <p className="text-sm text-green-200/70 leading-relaxed max-w-xs">
+            <p className="text-sm leading-relaxed text-green-100/60 max-w-xs">
               {t.home.heroTitle}
             </p>
-            <div className="flex space-x-2.5 pt-2">
+            {/* Social Links */}
+            <div className="flex gap-2.5 pt-1">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-800/40 text-green-200/60 transition-all duration-300 hover:text-white hover:scale-110 hover:shadow-lg ${social.color}`}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-green-100/60 transition-all hover:bg-white hover:text-[#1a3c2a]"
                   aria-label={social.name}
                 >
-                  <span className="transition-transform duration-300 group-hover:scale-110">
-                    {social.icon}
-                  </span>
+                  {social.icon}
                 </a>
               ))}
             </div>
@@ -124,17 +106,16 @@ const Footer = () => {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-yellow-400/90">
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-green-200/80 mb-5">
               {t.footer.company}
             </h3>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.path}>
                   <Link 
                     to={link.path} 
-                    className="group flex items-center text-sm text-green-200/70 transition-all duration-200 hover:text-white hover:translate-x-1"
+                    className="text-sm text-green-100/60 transition-all hover:text-white hover:translate-x-0.5 inline-block"
                   >
-                    <span className="mr-2 text-yellow-400/0 transition-all duration-200 group-hover:text-yellow-400 group-hover:mr-3">›</span>
                     {link.label}
                   </Link>
                 </li>
@@ -144,17 +125,16 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-yellow-400/90">
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-green-200/80 mb-5">
               {t.footer.resources}
             </h3>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.path}>
                   <Link 
                     to={link.path} 
-                    className="group flex items-center text-sm text-green-200/70 transition-all duration-200 hover:text-white hover:translate-x-1"
+                    className="text-sm text-green-100/60 transition-all hover:text-white hover:translate-x-0.5 inline-block"
                   >
-                    <span className="mr-2 text-yellow-400/0 transition-all duration-200 group-hover:text-yellow-400 group-hover:mr-3">›</span>
                     {link.label}
                   </Link>
                 </li>
@@ -162,78 +142,63 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact & Language */}
+          {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-yellow-400/90">
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-green-200/80 mb-5">
               {t.footer.contact}
             </h3>
-            <ul className="mt-4 space-y-3.5 text-sm text-green-200/70">
-              <li className="flex items-start gap-3 group">
-                <span className="text-yellow-400/70 mt-0.5 group-hover:text-yellow-400 transition-colors">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </span>
-                <span className="leading-relaxed">{siteData.contact.phone}</span>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <svg className="h-4 w-4 mt-0.5 flex-shrink-0 text-green-100/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span className="text-sm text-green-100/60">{siteData.contact.phone}</span>
               </li>
-              <li className="flex items-start gap-3 group">
-                <span className="text-yellow-400/70 mt-0.5 group-hover:text-yellow-400 transition-colors">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </span>
-                <span className="leading-relaxed">{siteData.contact.email}</span>
+              <li className="flex items-start gap-3">
+                <svg className="h-4 w-4 mt-0.5 flex-shrink-0 text-green-100/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span className="text-sm text-green-100/60 break-all">{siteData.contact.email}</span>
               </li>
-              <li className="flex items-start gap-3 group">
-                <span className="text-yellow-400/70 mt-0.5 group-hover:text-yellow-400 transition-colors">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </span>
-                <span className="leading-relaxed">{siteData.contact.address}</span>
+              <li className="flex items-start gap-3">
+                <svg className="h-4 w-4 mt-0.5 flex-shrink-0 text-green-100/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span className="text-sm text-green-100/60">{siteData.contact.address}</span>
               </li>
-              <li className="flex items-start gap-3 group">
-                <span className="text-yellow-400/70 mt-0.5 group-hover:text-yellow-400 transition-colors">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span>
-                <span className="leading-relaxed">{siteData.contact.hours}</span>
+              <li className="flex items-start gap-3">
+                <svg className="h-4 w-4 mt-0.5 flex-shrink-0 text-green-100/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-sm text-green-100/60">{siteData.contact.hours}</span>
               </li>
             </ul>
             
-            <div className="mt-6 pt-6 border-t border-green-800/40">
+            {/* Language Switcher - Now blends with footer */}
+            <div className="mt-6 pt-6 border-t border-white/10">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-green-200/50">Language</span>
+                <span className="text-xs text-green-100/40">Language</span>
                 <LanguageSwitcher />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 border-t border-green-800/40 pt-8">
+        {/* Bottom Bar */}
+        <div className="mt-12 border-t border-white/10 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-sm text-green-200/50">
-              © {currentYear} {siteData.company.name}. {t.footer.rights}
+            <p className="text-xs text-green-100/40">
+              &copy; {currentYear} {siteData.company.name}. {t.footer.rights}
             </p>
-            <div className="flex items-center gap-6 text-xs text-green-200/40">
-              <Link to="/privacy" className="hover:text-green-200 transition-colors duration-200">
+            <div className="flex items-center gap-4 text-xs text-green-100/30">
+              <Link to="/privacy" className="hover:text-green-100/60 transition-colors">
                 Privacy Policy
               </Link>
-              <span className="text-green-800/60">|</span>
-              <Link to="/terms" className="hover:text-green-200 transition-colors duration-200">
+              <span className="text-white/10">|</span>
+              <Link to="/terms" className="hover:text-green-100/60 transition-colors">
                 Terms of Service
               </Link>
-              <span className="text-green-800/60">|</span>
-              <span className="text-green-200/30 flex items-center gap-1">
-                <span>Built with</span>
-                <svg className="h-3 w-3 text-red-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                </svg>
-                <span>in Kenya</span>
-              </span>
             </div>
           </div>
         </div>

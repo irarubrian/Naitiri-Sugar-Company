@@ -1,5 +1,4 @@
 import { useLanguage } from '../i18n/LanguageContext';
-import Container from '../components/Container';
 import { siteData } from '../data/siteData';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -19,9 +18,9 @@ import newsPlaceholder from '../assets/images/news/placeholder.jpg';
 
 const Home = () => {
   const { t } = useLanguage();
-  const [counters, setCounters] = useState({});
+  const [counters, setCounters] = useState<Record<string, number>>({});
   const [isStatsVisible, setIsStatsVisible] = useState(false);
-  const statsRef = useRef(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   const stats = [
     { value: siteData.stats.years, label: 'Years of Experience', suffix: '+' },
@@ -76,31 +75,36 @@ const Home = () => {
     if (isStatsVisible) {
       stats.forEach((stat) => {
         const key = stat.label;
-        let start = 0;
         const end = stat.value;
+        let start = 0;
+        const duration = 2000;
+        const steps = 60;
+        const increment = end / steps;
+        let currentStep = 0;
+
         const timer = setInterval(() => {
-          start += end / 125;
-          if (start >= end) {
-            start = end;
-            clearInterval(timer);
-          }
+          currentStep++;
+          start = Math.min(increment * currentStep, end);
           setCounters(prev => ({ ...prev, [key]: Math.floor(start) }));
-        }, 16);
+          
+          if (currentStep >= steps) {
+            clearInterval(timer);
+            setCounters(prev => ({ ...prev, [key]: end }));
+          }
+        }, duration / steps);
+
         return () => clearInterval(timer);
       });
     }
   }, [isStatsVisible]);
 
-  // Fix scroll to section - ensures it scrolls to the top of the section
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <>
-      {/* ============================================================ */}
+    <div className="min-h-screen bg-white">
       {/* HERO SECTION */}
-      {/* ============================================================ */}
       <section className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0">
           <img 
@@ -108,14 +112,14 @@ const Home = () => {
             alt="Vast sugarcane fields at sunrise showcasing sustainable agriculture" 
             className="h-full w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c2a]/90 via-[#1a3c2a]/70 to-[#1a3c2a]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c2a]/95 via-[#1a3c2a]/75 to-[#1a3c2a]/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/95 via-transparent to-transparent" />
         </div>
 
         <div className="relative flex min-h-screen items-center">
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12">
             <div className="max-w-4xl text-white">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm backdrop-blur-sm">
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm backdrop-blur-sm">
                 <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
                 Est. 1985 • Sustainable Agriculture
               </div>
@@ -124,17 +128,17 @@ const Home = () => {
                 Producing Quality.<br />
                 Building Communities.
               </h1>
-              <p className="mt-4 max-w-2xl text-lg text-white/80 sm:text-xl">
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 sm:text-xl">
                 {t.home.heroSub}
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link to="/products">
-                  <button className="rounded-lg bg-white px-8 py-3 font-semibold text-[#1a3c2a] shadow-lg transition-all hover:scale-105 hover:bg-gray-50 hover:shadow-xl">
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link to="/products" onClick={scrollToTop}>
+                  <button className="rounded-lg bg-white px-8 py-3.5 font-semibold text-[#1a3c2a] shadow-lg transition-all hover:bg-gray-50 hover:shadow-xl hover:-translate-y-0.5">
                     {t.home.heroBtn1}
                   </button>
                 </Link>
                 <Link to="/contact" onClick={scrollToTop}>
-                  <button className="rounded-lg border-2 border-white/40 px-8 py-3 font-semibold text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/10">
+                  <button className="rounded-lg border-2 border-white/40 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:-translate-y-0.5">
                     {t.home.heroBtn2}
                   </button>
                 </Link>
@@ -145,8 +149,8 @@ const Home = () => {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce sm:block">
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-xs uppercase tracking-widest text-white/40">Scroll</span>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">Scroll</span>
             <svg className="h-6 w-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
@@ -154,48 +158,44 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* STATISTICS */}
-      {/* ============================================================ */}
       <section ref={statsRef} className="border-b border-gray-200 bg-white py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-4xl font-bold text-[#1a3c2a]">
-                  {isStatsVisible ? counters[stat.label] || 0 : 0}
+                <div className="text-4xl font-bold text-[#1a3c2a] lg:text-5xl">
+                  {isStatsVisible ? (counters[stat.label] || 0) : 0}
                   {stat.suffix}
                 </div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wider text-gray-500">
+                <div className="mt-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
                   {stat.label}
                 </div>
-                <div className="mx-auto mt-2 h-px w-8 bg-[#1a3c2a]/20" />
+                <div className="mx-auto mt-3 h-0.5 w-8 bg-[#1a3c2a]/20" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* ABOUT */}
-      {/* ============================================================ */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="grid items-center gap-16 lg:grid-cols-2">
             <div>
               <div className="mb-3 flex items-center gap-3 text-sm font-semibold text-[#1a3c2a]">
                 <span className="h-px w-8 bg-[#1a3c2a]" />
                 ABOUT NAITIRI SUGAR
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
                 {t.home.introTitle}
               </h2>
-              <p className="mt-4 text-base text-gray-600 leading-relaxed">
+              <p className="mt-6 text-base leading-relaxed text-gray-600">
                 {t.home.introText}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-6">
                 <Link to="/about" onClick={scrollToTop}>
-                  <button className="rounded-lg bg-[#1a3c2a] px-6 py-2.5 font-semibold text-white transition-all hover:bg-[#2a5c3a] hover:shadow-lg">
+                  <button className="rounded-lg bg-[#1a3c2a] px-6 py-3 font-semibold text-white transition-all hover:bg-[#2a5c3a] hover:shadow-lg hover:-translate-y-0.5">
                     {t.home.introBtn}
                   </button>
                 </Link>
@@ -211,15 +211,15 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="relative overflow-hidden rounded-xl shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/60 to-transparent" />
+            <div className="relative overflow-hidden rounded-2xl shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/60 via-transparent to-transparent z-10" />
               <img
                 src={factoryImage}
                 alt="Modern sugar processing facility with advanced machinery"
-                className="h-[400px] w-full object-cover object-center"
+                className="h-[450px] w-full object-cover object-center transition-transform duration-700 hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute bottom-6 left-6 rounded-lg bg-[#1a3c2a]/80 px-4 py-2 text-sm text-white backdrop-blur-sm">
+              <div className="absolute bottom-6 left-6 z-20 rounded-lg bg-[#1a3c2a]/80 px-4 py-2 text-sm text-white backdrop-blur-sm">
                 Modern Sugar Processing Facility
               </div>
             </div>
@@ -227,12 +227,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* AGRICULTURAL STORY */}
-      {/* ============================================================ */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
+      <section className="bg-gray-50 py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
             <div className="mb-3 flex items-center justify-center gap-3 text-sm font-semibold text-[#1a3c2a]">
               <span className="h-px w-8 bg-[#1a3c2a]" />
               OUR AGRICULTURAL STORY
@@ -241,11 +239,11 @@ const Home = () => {
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
               {t.home.networkTitle}
             </h2>
-            <p className="mt-3 text-base text-gray-600">
+            <p className="mt-4 text-base text-gray-600">
               From farm to table — empowering farmers and communities through sustainable agriculture.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2">
             {[
               { 
                 img: farmerImage, 
@@ -260,7 +258,7 @@ const Home = () => {
                 alt: 'Lush green sugarcane fields stretching across the landscape' 
               }
             ].map((item) => (
-              <div key={item.title} className="group relative overflow-hidden rounded-xl shadow-lg transition-all hover:shadow-xl">
+              <div key={item.title} className="group relative overflow-hidden rounded-2xl shadow-lg transition-all hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/80 via-[#1a3c2a]/30 to-transparent z-10" />
                 <img
                   src={item.img}
@@ -268,9 +266,9 @@ const Home = () => {
                   className="h-[400px] w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute bottom-0 p-6 text-white z-20">
+                <div className="absolute bottom-0 p-8 text-white z-20">
                   <h3 className="text-2xl font-bold">{item.title}</h3>
-                  <p className="mt-1 max-w-md text-sm text-green-100">{item.text}</p>
+                  <p className="mt-2 max-w-md text-sm leading-relaxed text-green-100">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -278,12 +276,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* PRODUCTS */}
-      {/* ============================================================ */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
             <div className="mb-3 flex items-center justify-center gap-3 text-sm font-semibold text-[#1a3c2a]">
               <span className="h-px w-8 bg-[#1a3c2a]" />
               OUR PRODUCTS
@@ -293,7 +289,7 @@ const Home = () => {
               {t.home.productsTitle}
             </h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3">
             {products.map((product) => (
               <Link key={product.title} to={product.link} className="group" onClick={scrollToTop}>
                 <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
@@ -315,8 +311,8 @@ const Home = () => {
                     <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-[#1a3c2a]">
                       {product.title}
                     </h3>
-                    <p className="mt-2 text-sm text-gray-600">{product.desc}</p>
-                    <span className="mt-4 inline-flex items-center text-sm font-medium text-[#1a3c2a] transition-all group-hover:translate-x-2">
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">{product.desc}</p>
+                    <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#1a3c2a] transition-all group-hover:gap-2">
                       Learn More
                       <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -330,11 +326,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* VALUES */}
-      {/* ============================================================ */}
-      <section className="border-t border-gray-200 bg-gray-50 py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-gray-200 bg-gray-50 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
@@ -354,25 +348,23 @@ const Home = () => {
               }
             ].map((item) => (
               <div key={item.title} className="text-center group">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#1a3c2a]/10 transition-all group-hover:bg-[#1a3c2a]/20">
-                  <svg className="h-7 w-7 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#1a3c2a]/10 transition-all group-hover:bg-[#1a3c2a]/20 group-hover:scale-110">
+                  <svg className="h-8 w-8 text-[#1a3c2a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.icon} />
                   </svg>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
-                <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">{item.desc}</p>
+                <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-gray-600">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* SUSTAINABILITY */}
-      {/* ============================================================ */}
-      <section className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto mb-12 max-w-3xl text-center">
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
             <div className="mb-3 flex items-center justify-center gap-3 text-sm font-semibold text-[#1a3c2a]">
               <span className="h-px w-8 bg-[#1a3c2a]" />
               SUSTAINABILITY
@@ -382,7 +374,7 @@ const Home = () => {
               {t.home.sustainabilityTitle}
             </h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2">
             {[
               { 
                 img: environmentImage, 
@@ -397,7 +389,7 @@ const Home = () => {
                 alt: 'Community engagement and social development programs' 
               }
             ].map((item) => (
-              <div key={item.title} className="group relative overflow-hidden rounded-xl shadow-lg transition-all hover:shadow-xl">
+              <div key={item.title} className="group relative overflow-hidden rounded-2xl shadow-lg transition-all hover:shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c2a]/80 via-[#1a3c2a]/30 to-transparent z-10" />
                 <img
                   src={item.img}
@@ -405,9 +397,9 @@ const Home = () => {
                   className="h-[400px] w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute bottom-0 p-6 text-white z-20">
+                <div className="absolute bottom-0 p-8 text-white z-20">
                   <h3 className="text-2xl font-bold">{item.title}</h3>
-                  <p className="mt-1 max-w-md text-sm text-green-100">{item.text}</p>
+                  <p className="mt-2 max-w-md text-sm leading-relaxed text-green-100">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -415,11 +407,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ============================================================ */}
       {/* NEWS */}
-      {/* ============================================================ */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-gray-50 py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="mb-12 flex items-center justify-between">
             <div>
               <div className="mb-2 flex items-center gap-3 text-sm font-semibold text-[#1a3c2a]">
@@ -431,101 +421,50 @@ const Home = () => {
               </h2>
             </div>
             <Link to="/news" onClick={scrollToTop}>
-              <button className="rounded-lg border-2 border-[#1a3c2a] px-5 py-2.5 font-semibold text-[#1a3c2a] transition-all hover:bg-[#1a3c2a] hover:text-white">
+              <button className="rounded-lg border-2 border-[#1a3c2a] px-6 py-2.5 font-semibold text-[#1a3c2a] transition-all hover:bg-[#1a3c2a] hover:text-white">
                 View All →
               </button>
             </Link>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {news.map((article) => (
-              <div key={article.id} className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-full bg-[#1a3c2a] px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
-                      {article.category}
-                    </span>
+          <div className="grid gap-8 md:grid-cols-3">
+            {news.slice(0, 3).map((article) => (
+              <Link to="/news" key={article.id} onClick={scrollToTop} className="group">
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl">
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="rounded-full bg-[#1a3c2a] px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+                        {article.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <span className="text-xs text-gray-500">{article.date}</span>
-                  <h3 className="mt-2 text-lg font-bold text-gray-900 transition-colors group-hover:text-[#1a3c2a]">
-                    {article.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600 line-clamp-2">{article.excerpt}</p>
-                  <Link to="/news" onClick={scrollToTop}>
-                    <span className="mt-4 inline-flex items-center text-sm font-medium text-[#1a3c2a] transition-all hover:translate-x-2">
+                  <div className="p-6">
+                    <span className="text-xs text-gray-500">{article.date}</span>
+                    <h3 className="mt-2 text-lg font-bold text-gray-900 transition-colors group-hover:text-[#1a3c2a]">
+                      {article.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600 line-clamp-2">{article.excerpt}</p>
+                    <span className="mt-4 inline-flex items-center text-sm font-semibold text-[#1a3c2a] transition-all group-hover:gap-2">
                       Read More
                       <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
-                  </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/* CAREERS */}
-      {/* ============================================================ */}
-      <section className="relative bg-[#1a3c2a] py-20 text-white">
-        <div className="absolute inset-0 opacity-30">
-          <img src={careersImage} alt="Career opportunities at Naitiri Sugar" className="h-full w-full object-cover object-center" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a3c2a]/95 to-[#1a3c2a]/80" />
-        
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mx-auto max-w-3xl">
-            <div className="mb-4 flex items-center justify-center gap-3 text-sm font-semibold text-green-300">
-              <span className="h-px w-8 bg-green-300" />
-              CAREER OPPORTUNITIES
-              <span className="h-px w-8 bg-green-300" />
-            </div>
-            <h2 className="text-3xl font-bold sm:text-4xl">{t.home.careersTitle}</h2>
-            <p className="mt-3 text-lg text-green-100/80">{t.home.careersText}</p>
-            <Link to="/careers" onClick={scrollToTop}>
-              <button className="mt-6 rounded-lg bg-white px-8 py-3 font-semibold text-[#1a3c2a] shadow-lg transition-all hover:scale-105 hover:bg-gray-50 hover:shadow-xl">
-                {t.home.careersBtn}
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* FINAL CTA */}
-      {/* ============================================================ */}
-      <section className="bg-[#1a3c2a] py-20 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="text-3xl font-bold sm:text-4xl">{t.home.ctaTitle}</h2>
-            <p className="mt-3 text-lg text-green-100/80">
-              Join us in our journey to build a sustainable and prosperous agricultural future.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Link to="/contact" onClick={scrollToTop}>
-                <button className="rounded-lg bg-white px-8 py-3 font-semibold text-[#1a3c2a] shadow-lg transition-all hover:scale-105 hover:bg-gray-50 hover:shadow-xl">
-                  {t.home.ctaBtn1}
-                </button>
-              </Link>
-              <Link to="/about" onClick={scrollToTop}>
-                <button className="rounded-lg border-2 border-white/40 px-8 py-3 font-semibold text-white backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/10">
-                  {t.home.ctaBtn2}
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+     
+    </div>
   );
 };
 
