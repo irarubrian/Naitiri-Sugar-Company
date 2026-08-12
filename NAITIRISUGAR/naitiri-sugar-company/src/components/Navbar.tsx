@@ -90,25 +90,18 @@ const Navbar = () => {
           className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
           aria-label="Main navigation"
         >
-          {/* Logo */}
+          {/* Logo - Clean & Visible */}
           <Link
             to="/"
             className="group flex shrink-0 items-center"
             aria-label="Naitiri Sugar Company home"
           >
-            <img
-              src={logo}
-              alt="Naitiri Sugar Company"
-              className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
-            />
-
-            <div className="ml-3 hidden border-l border-gray-200 pl-3 sm:block">
-              <p className="text-[15px] font-bold leading-tight tracking-tight text-green-950">
-                NAITIRI
-              </p>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-green-700">
-                Sugar Company
-              </p>
+            <div className="relative flex items-center">
+              <img
+                src={logo}
+                alt="Naitiri Sugar Company"
+                className="h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 group-hover:brightness-105 lg:h-[72px]"
+              />
             </div>
           </Link>
 
@@ -230,6 +223,15 @@ const Navbar = () => {
           }`}
         >
           <div className="mx-auto max-w-7xl overflow-y-auto px-4 py-5 sm:px-6">
+            {/* Mobile Logo - Clean & Visible */}
+            <div className="mb-4 flex items-center border-b border-gray-100 pb-4">
+              <img
+                src={logo}
+                alt="Naitiri Sugar Company"
+                className="h-12 w-auto object-contain"
+              />
+            </div>
+
             <div className="space-y-1">
               {navItems.map((item) => (
                 <NavLink
